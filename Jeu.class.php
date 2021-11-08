@@ -1,6 +1,5 @@
 <?php
-const NB_CARTES_TOTAL = 52;
-const NB_MAX_JOUEURS = 2;
+
 
 require_once('./JeuUtils.class.php');
 
@@ -27,7 +26,7 @@ class Jeu
         return $this->joueurs;
     }
 
-    public function creerJoueur(string $nomJoueur): void {
+    public function creerJoueur(string $nomJoueur) {
         $joueur = new Joueur($nomJoueur);
 
         JeuUtils::verifierJoueur($this, $joueur);
@@ -37,7 +36,7 @@ class Jeu
     }
 
 
-    public function lancerJeu(): void {
+    public function lancerJeu() {
         JeuUtils::verifierEtatJeu($this);
 
         $nbCartesParJoueur = $this->distribuerCartes();
@@ -85,5 +84,3 @@ class Jeu
 
     }
 }
-
-?>

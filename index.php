@@ -19,4 +19,3 @@ $jeu->lancerJeu();
 // Affichage du nom du gagnant
 echo "Résultat : " . $jeu->getResultat();
 
-?>
