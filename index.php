@@ -10,7 +10,6 @@ require_once('./Joueur.class.php');
 $jeu = new Jeu;
 // Ajout des joueurs
 $jeu->creerJoueur("Roger Rabbit");
-$jeu->creerJoueur("Roger RABBIT");
 $jeu->creerJoueur("Eddie Valliant");
 
 

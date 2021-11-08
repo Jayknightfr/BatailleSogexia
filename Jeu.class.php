@@ -38,9 +38,7 @@ class Jeu
 
 
     public function lancerJeu(): void {
-        if (count($this->joueurs) <> NB_MAX_JOUEURS) {
-            throw new Exception("Le jeu ne peut se lancer qu'avec " . NB_MAX_JOUEURS . " joueurs");
-        }
+        JeuUtils::verifierEtatJeu($this);
 
         $nbCartesParJoueur = $this->distribuerCartes();
 
@@ -59,7 +57,12 @@ class Jeu
     }
 
     public function getResultat(): string {
+        // Tri des joueurs par score décroissant
+        usort($this->joueurs, array("Joueur", "compare"));
 
+        foreach($this->joueurs as $j) {
+            echo $j->getNomJoueur() . " - " . $j->getScore() . "\n";
+        }
 
         // Est-ce un match nul?
         $score1 = $this->joueurs[0]->getScore();
@@ -68,14 +71,7 @@ class Jeu
             return "match nul";
         }
 
-        // Tri des joueurs par score décroissant
-        usort($this->joueurs, array("Joueur", "compare"));
-
-        foreach($this->joueurs as $j) {
-            echo $j->getNomJoueur() . " - " . $j->getScore() . "<br/>";
-        }
-
-        return "victoire de " . $this->joueurs[0]->getNomJoueur();
+        return "victoire de " . $this->joueurs[0]->getNomJoueur() . "\n";
     }
 
     private function distribuerCartes(): int {
@@ -85,9 +81,6 @@ class Jeu
             $this->joueurs[$i]->cartes =
                 array_slice($this->deck, $nbCartesParJoueur * $i, $nbCartesParJoueur);
         }
-
-//        echo "Il reste " . (count($this->deck) - $nbCartesParJoueur * count($this->joueurs)) . " cartes dans le deck <br/>";
-
         return $nbCartesParJoueur;
 
     }
