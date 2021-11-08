@@ -2,6 +2,8 @@
 const NB_CARTES_TOTAL = 52;
 const NB_MAX_JOUEURS = 2;
 
+require_once('./JeuUtils.class.php');
+
 class Jeu
 {
 
@@ -21,15 +23,19 @@ class Jeu
         return count($this->joueurs);
     }
 
-    public function creerJoueur(Joueur $joueur): void {
-        if (count($this->joueurs) == NB_MAX_JOUEURS) {
-            throw new Exception("Il ne peut pas y avoir plus que " . NB_MAX_JOUEURS . " joueurs");
-        }
-        //TODO Verifier existence joueur au nom identique
+    public function getJoueurs(): array {
+        return $this->joueurs;
+    }
 
+    public function creerJoueur(string $nomJoueur): void {
+        $joueur = new Joueur($nomJoueur);
+
+        JeuUtils::verifierJoueur($this, $joueur);
 
         $this->joueurs[] = $joueur;
+
     }
+
 
     public function lancerJeu(): void {
         if (count($this->joueurs) <> NB_MAX_JOUEURS) {

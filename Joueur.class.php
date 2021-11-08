@@ -10,6 +10,12 @@ class Joueur {
         $this->cartes = [];
     }
 
+    public function __toString()
+    {
+        return "Joueur: $this->nom";
+    }
+
+
     public function getScore(): int {
         return $this->score;
     }
